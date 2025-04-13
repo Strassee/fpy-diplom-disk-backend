@@ -37,7 +37,7 @@ class FileUpdateSerializer(ModelSerializer):
     name_origin_regexp = re.compile(r'^[0-9a-zA-Zа-яА-Я_\-. ]+$')
     if 0 > len(attrs['name_origin']) > 255 or name_origin_regexp.match(attrs['name_origin']) is None:
       raise ValidationError('name_origin validation error')
-    if len(attrs['comment']) > 255 :
+    if attrs['comment'] is not None and len(attrs['comment']) > 255 :
       raise ValidationError('comment validation error')
 
     return attrs
